@@ -1,0 +1,27 @@
+{
+    "name": "mennen-online/laralex",
+    "description": "Laravel API Wrapper for LexOffice",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "MennenOnline\\Laralex\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MennenOnline\\Laralex\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Chris Kerpa",
+            "email": "chris.kerpa@mennen.online"
+        }
+    ],
+    "require-dev": {
+        "orchestra/testbench": "^6.23"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.4"
+    }
+}
