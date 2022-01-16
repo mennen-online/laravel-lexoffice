@@ -2,9 +2,7 @@
 
 namespace MennenOnline\Laralex\Tests;
 
-use Illuminate\Support\Facades\Config;
-use MennenOnline\Laralex\Laralex;
-use Orchestra\Testbench\TestCase;
+use MennenOnline\Laralex\Facades\Laralex;
 use GuzzleHttp;
 
 class LaralexTest extends TestCase
@@ -16,6 +14,7 @@ class LaralexTest extends TestCase
 
     public function test_functions()
     {
+        Laralex::init();
         $array = Laralex::getAllContacts();
 //        $array = LaraLex::getContact("5f0bfb5a-f243-446f-87ba-ac5590bd9834");
 //        Laralex::createPerson(["customer" => []], ["salutation" => "Herr", "firstName" => "Testimus", "lastName" => "Prime"], "");

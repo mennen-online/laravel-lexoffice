@@ -10,23 +10,46 @@ use GuzzleHttp;
  */
 class Laralex
 {
-    private const DEBUG = true;
-    private const apiURL = "https://api.lexoffice.io/";
-//    private const token = ""; //REAL
-    private const token = "mTGx6xlO1onKscoDBpgy1h98GK8"; //TEST
 
-    public static function getContact(string $id): array
+    /**
+     * Sets globals used within the Laralex Class
+     */
+
+    public function init()
     {
-        return Laralex::get("v1/contacts/", $id);
+        define("APIURL", config("laralex.api-url"));
+        define("TOKEN", config("laralex.api-token-live"));
+        define("ENDPOINT_CONTACTS", config("laralex.endpoint-contacts"));
+        define("DEBUG", config('laralex.debug'));
     }
 
-    public static function get(string $endpoint, string $payload): array
+    /**
+     * Gets specified contact by UUID
+     * @param string $id
+     * @return array
+     */
+
+    public function getContact(string $id): array
+    {
+
+        return Laralex::get(ENDPOINT_CONTACTS, $id);
+
+    }
+
+    /**
+     * Handles all operations that can be requested by GET commands via the LexOffice API
+     * @param string $endpoint Endpoint of the API eg v1/contacts, etc
+     * @param string $payload Operation to be exectued
+     * @return array Returned data of the API
+     * @throws GuzzleHttp\Exception\GuzzleException
+     */
+    private function get(string $endpoint, string $payload): array
     {
         $client = new GuzzleHttp\Client();
 
-        $request = $client->request('GET', self::apiURL . $endpoint . $payload, [
+        $request = $client->request('GET', APIURL . $endpoint . $payload, [
             'headers' => [
-                "Authorization" => "Bearer " . self::token,
+                "Authorization" => "Bearer " . TOKEN,
                 "Accept" => "application/json"
             ]
         ]);
@@ -34,19 +57,30 @@ class Laralex
         $response = $request->getBody();
 
         // Enable logging if DEBUG is true
-        if (self::DEBUG) {
+        if (DEBUG) {
             file_put_contents("output.php", print_r(json_decode($response, true), true));
         }
 
         return json_decode($response, true);
     }
 
-    public static function getAllContacts(): array
+    /**
+     * Gets all contacts
+     * @return array
+     * @throws GuzzleHttp\Exception\GuzzleException
+     */
+    public function getAllContacts(): array
     {
-        return Laralex::get("v1/contacts/", "?page=0");
+        return Laralex::get(ENDPOINT_CONTACTS, "?page=0");
     }
 
-    public static function createPerson(array $role, array $person, string $note)
+    /**
+     * Creates a PERSON
+     * @param array $role
+     * @param array $person
+     * @param string $note
+     */
+    public function createPerson(array $role, array $person, string $note)
     {
         $merge = [
             'version' => 0,
@@ -55,30 +89,51 @@ class Laralex
             'note' => $note
         ];
 
-        if (self::DEBUG) {
+        if (DEBUG) {
             Laralex::log(json_encode($merge), "json");
         }
 
-        Laralex::post("v1/contacts/", $merge);
+        Laralex::post(ENDPOINT_CONTACTS, $merge);
     }
 
-    private static function log($input, string $type)
+    /**
+     * Enables lacking logs
+     * @param $input
+     * @param string $type
+     */
+    private function log($input, string $type)
     {
         file_put_contents("output." . $type, print_r($input, true));
     }
 
-    private static function post($endpoint, $payload)
+    /**
+     * Executes all operations which require POST
+     * @param $endpoint
+     * @param $payload
+     * @throws GuzzleHttp\Exception\GuzzleException
+     */
+    private function post($endpoint, $payload)
     {
         $client = new GuzzleHttp\Client();
 
-        $request = $client->request("POST", self::apiURL . $endpoint, [
+        $request = $client->request("POST", APIURL . $endpoint, [
             'headers' => [
-                "Authorization" => "Bearer " . self::token,
+                "Authorization" => "Bearer " . TOKEN,
                 "Accept" => "application/json",
                 "Content-Type" => "application/json"
             ],
             "body" => json_encode($payload, JSON_FORCE_OBJECT)
         ]);
+
+    }
+
+    /**
+     * @param array $roles
+     * @param array $company
+     * @param array $contacts
+     */
+    public function createCompany(array $roles, array $company, array $contacts)
+    {
 
     }
 

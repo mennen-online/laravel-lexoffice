@@ -23,5 +23,12 @@
     },
     "require": {
         "guzzlehttp/guzzle": "^7.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers" : [
+                "MennenOnline\\Laralex\\LaralexServiceProvider"
+            ]
+        }
     }
 }
