@@ -26,8 +26,8 @@
                             <li class="cursor-pointer bg-blue-700 rounded-lg py-1 px-2.5 mb-2 {{ Request::is("laralex") ? "bg-blue-500" : ""}}">Start</li>
 
 
-                            <li class="bg-blue-700 z-10 relative rounded-lg py-1 -mb-1.5 px-2.5" id="contactsDropdownContainer">
-                                <div class="flex justify-between items-center" onclick="showDropdown()">
+                            <li class="bg-blue-700 z-10 relative rounded-lg py-1 -mb-1.5 px-2.5 {{ Request::is("laralex/contacts") ? "bg-blue-500" : ""}}" id="contactsDropdownContainer">
+                                <div class="flex justify-between items-center " onclick="showDropdown()">
                                     <a class="">Kontakte</a>
                                     <svg id="contactsChevron" xmlns="http://www.w3.org/2000/svg"
                                          class="h-4 w-4 cursor-pointer ease-in-out transition-transform" fill="none"
@@ -79,7 +79,14 @@
 
         @show
         <div class="col-span-5">
-            @yield("content")
+            @section("topNav")
+                <div id="topNav" class="h-10 flex bg-slate-200 shadow">
+
+                </div>
+            @show
+            <div class="bg-slate-100">
+                @yield("content")
+            </div>
         </div>
     </div>
 </body>

@@ -10,7 +10,7 @@ class LaralexController extends Controller
     public function viewContact()
     {
         $data = Laralex::getAllContacts();
-        return view("laralex::contacts")->with("data", $data['content']);
+        return view("laralex::contacts2")->with("data", $data['content']);
 
     }
 }
