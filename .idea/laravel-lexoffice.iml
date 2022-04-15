@@ -2,7 +2,6 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/Laralex/vendor" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Laralex/vendor/doctrine/inflector/lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Laralex/vendor/doctrine/instantiator/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Laralex/vendor/doctrine/lexer/lib" isTestSource="false" />
@@ -27,6 +26,8 @@
       <sourceFolder url="file://$MODULE_DIR$/Laralex/vendor/vlucas/phpdotenv/src" isTestSource="false" packagePrefix="Dotenv" />
       <sourceFolder url="file://$MODULE_DIR$/Laralex/vendor/voku/portable-ascii/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Laralex/vendor/zbateson/mb-wrapper/tests" isTestSource="true" packagePrefix="ZBateson" />
+      <sourceFolder url="file://$MODULE_DIR$/Laralex/src" isTestSource="false" packagePrefix="MennenOnline\Laralex" />
+      <sourceFolder url="file://$MODULE_DIR$/Laralex/tests" isTestSource="true" packagePrefix="MennenOnline\Laralex\Tests" />
       <excludeFolder url="file://$MODULE_DIR$/Laralex/vendor/symfony/polyfill-intl-grapheme" />
       <excludeFolder url="file://$MODULE_DIR$/Laralex/vendor/sebastian/code-unit" />
       <excludeFolder url="file://$MODULE_DIR$/Laralex/vendor/symfony/polyfill-intl-idn" />

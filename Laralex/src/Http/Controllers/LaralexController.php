@@ -11,5 +11,6 @@ class LaralexController extends Controller
     {
         $data = Laralex::getAllContacts();
         return view("laralex::contacts")->with("data", $data['content']);
+
     }
 }
