@@ -9,85 +9,103 @@
     <title>@yield("title")</title>
 </head>
 <body>
-    <div class="grid grid-cols-6 ">
-        <div>
-            @section("sideNav")
-                <div id="nav" class="bg-blue-600 min-h-screen">
-                    <div id="navHeader" class="shadow">
-                        <div class="flex py-5 bg-blue-800 justify-center m-auto text-2xl text-slate-200">
-                            Laralex
-                        </div>
+<div class="grid grid-cols-6">
+    <div>
+        @section("sideNav")
+            <div id="nav" class="min-h-screen bg-blue-600">
+                <div id="navHeader" class="shadow">
+                    <div class="flex justify-center py-5 m-auto text-2xl bg-blue-800 text-slate-200">
+                        Laralex
                     </div>
-                    <div id="navOptions" class="text-slate-100 text-opacity-90 p-3">
+                </div>
+                <div id="navOptions" class="p-3 text-opacity-90 text-slate-100">
 
-                        <ul class="">
-
-
-                            <li class="cursor-pointer bg-blue-700 rounded-lg py-1 px-2.5 mb-2 {{ Request::is("laralex") ? "bg-blue-500" : ""}}">Start</li>
+                    <ul class="">
 
 
-                            <li class="bg-blue-700 z-10 relative rounded-lg py-1 -mb-1.5 px-2.5 {{ Request::is("laralex/contacts") ? "bg-blue-500" : ""}}" id="contactsDropdownContainer">
-                                <div class="flex justify-between items-center " onclick="showDropdown()">
-                                    <a class="">Kontakte</a>
-                                    <svg id="contactsChevron" xmlns="http://www.w3.org/2000/svg"
-                                         class="h-4 w-4 cursor-pointer ease-in-out transition-transform" fill="none"
-                                         viewBox="0 0 24 24"
-                                         stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                                    </svg>
-                                </div>
-
-
+                        <a href="{{ url("/laralex/") }}">
+                            <li class="cursor-pointer bg-blue-700 rounded-lg py-1 px-2.5 mb-2 {{ Request::is("laralex") ? "bg-blue-500" : ""}}">
+                                Start
                             </li>
-
-                            <ul class="relative hidden z-0 ease-in-out relative opacity-0 rounded-b-lg pb-1 transition-all -top-6 bg-blue-700 px-2.5 pt-0.5 mb-2" id="contactsDropdown">
-                                <li class="">Privatpersonen</li>
-                                <li>Firmen</li>
-                            </ul>
+                        </a>
 
 
+                        <li class="bg-blue-700 z-30 relative rounded-lg py-1 -mb-1.5 px-2.5 {{ Request::is("laralex/contacts") || Request::is("laralex/companies") ? "bg-blue-500 shadow" : ""}}"
+                            id="contactsDropdownContainer">
+                            <div class="flex justify-between items-center" onclick="showDropdown()">
+
+                                <p class="cursor-pointer">Kontakte</p>
+
+                                <svg id="contactsChevron" xmlns="http://www.w3.org/2000/svg"
+                                     class="w-4 h-4 transition-transform ease-in-out cursor-pointer" fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </div>
+
+
+                        </li>
+
+                        <ul class="hidden relative -top-6 pt-1 text-sm bg-blue-700 rounded-b-lg opacity-0 transition-all ease-in-out"
+                            id="contactsDropdown">
+
+                            <a class="" href="{{ url("laralex/contacts") }}">
+                                <li class="relative z-20 {{ Request::is("laralex/contacts") ? "bg-blue-400 py-1 shadow" : "bg-blue-700"}} rounded-b-lg py-0.5 px-2.5">
+                                    Privatpersonen
+                                </li>
+                            </a>
+
+                            <a href="{{ url("laralex/companies") }}">
+                                <li class="relative z-10 -mt-1   {{ Request::is("laralex/companies") ? "bg-blue-400 py-1 shadow" : "bg-blue-700 "}} rounded-b-lg  pt-1 pb-0.5 px-2.5">
+                                    Firmen
+                                </li>
+                            </a>
                         </ul>
-                    </div>
+
+
+                    </ul>
                 </div>
-
-
-        </div>
-
-        <script type="text/javascript">
-            function showDropdown() {
-                const drop = document.getElementById("contactsDropdown");
-                const chev = document.getElementById("contactsChevron");
-
-                if (drop.classList.contains("hidden")) {
-                    drop.classList.remove("hidden");
-
-                    setTimeout(function () {
-                        drop.classList.add("opacity-100", "duration-500", "top-0");
-                        chev.classList.add("-rotate-90", "duration-500");
-                    }, 1);
-                } else {
-                    drop.classList.remove("opacity-100", "duration-500", "top-0");
-                    drop.classList.add("opacity-0", "duration-500", "-top-6");
-                    chev.classList.remove("-rotate-90");
-
-                    setTimeout(function () {
-                        drop.classList.add("hidden");
-                    }, 300)
-                }
-            }
-        </script>
-
-        @show
-        <div class="col-span-5">
-            @section("topNav")
-                <div id="topNav" class="h-10 flex bg-slate-200 shadow">
-
-                </div>
-            @show
-            <div class="bg-slate-100">
-                @yield("content")
             </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        function showDropdown() {
+            const drop = document.getElementById("contactsDropdown");
+            const chev = document.getElementById("contactsChevron");
+
+            if (drop.classList.contains("hidden")) {
+                drop.classList.remove("hidden");
+
+                setTimeout(function () {
+                    drop.classList.add("opacity-100", "duration-500", "top-0");
+                    chev.classList.add("-rotate-90", "duration-500");
+                }, 1);
+            } else {
+                drop.classList.remove("opacity-100", "duration-500", "top-0");
+                drop.classList.add("opacity-0", "duration-500", "-top-6");
+                chev.classList.remove("-rotate-90");
+
+                setTimeout(function () {
+                    drop.classList.add("hidden");
+                }, 500)
+            }
+        }
+    </script>
+
+    @show
+    <div class="col-span-5">
+        @section("topNav")
+            <div id="topNav" class="flex h-10 shadow bg-slate-200">
+
+            </div>
+        @show
+        <div class="bg-slate-100">
+            @yield("content")
         </div>
     </div>
+</div>
 </body>
 </html>

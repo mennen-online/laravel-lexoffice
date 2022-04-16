@@ -7,10 +7,10 @@ use Illuminate\Routing\Controller;
 
 class LaralexController extends Controller
 {
-    public function viewContact()
+    public function viewContacts()
     {
         $data = Laralex::getAllContacts();
-        return view("laralex::contacts2")->with("data", $data['content']);
+        return view("laralex::companies")->with("data", $data['content']);
 
     }
 }

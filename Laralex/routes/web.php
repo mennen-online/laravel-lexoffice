@@ -1,10 +1,8 @@
 <?php
 
-
-
-Route::get("/", "LaralexController@viewContact");
-Route::get("test", function() {
+Route::get("/", function() {
     return view("laralex::index");
 });
 
-Route::get("contacts", "LaralexController@viewContact");
+Route::get("contacts", "LaralexController@viewContacts");
+Route::get("companies", "LaralexController@viewContacts");

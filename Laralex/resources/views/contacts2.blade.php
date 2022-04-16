@@ -14,22 +14,18 @@
         @foreach($data as $contact)
             <tr class="odd:bg-slate-100 even:bg-blue-100">
                 @if(array_key_exists("person", $contact))
-                <td class="p-1">
+                    <td class="p-1">
                         {{ $contact["person"]["firstName"] }}
-                @else
-                    <td class="p-1" colspan="2">
-                        {{ $contact["company"]["name"]}}
-                    @endif
-                </td>
-                @if(array_key_exists("person", $contact))
-                <td class="p-1">
-                        {{ $contact["person"]["lastName"] }}
+                    </td>
 
-                    @endif
-                </td>
-                <td class="p-1">
-                    {{ $contact["id"] }}
-                </td>
+                    <td class="p-1">
+                        {{ $contact["person"]["lastName"] }}
+                    </td>
+
+                    <td class="p-1">
+                        {{ $contact["id"] }}
+                    </td>
+                @endif
             </tr>
         @endforeach
     </table>
