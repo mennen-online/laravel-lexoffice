@@ -19,7 +19,8 @@
         }
     ],
     "require-dev": {
-        "orchestra/testbench": "^6.23"
+        "orchestra/testbench": "^6.23",
+        "barryvdh/laravel-ide-helper": "^2.12"
     },
     "require": {
         "guzzlehttp/guzzle": "^7.4"

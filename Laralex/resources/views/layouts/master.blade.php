@@ -23,7 +23,7 @@
                     <ul class="">
 
 
-                        <a href="{{ url("/laralex/") }}">
+                        <a href="{{ url("/laralex/")  }}">
                             <li class="cursor-pointer bg-blue-700 rounded-lg py-1 px-2.5 mb-2 {{ Request::is("laralex") ? "bg-blue-500" : ""}}">
                                 Start
                             </li>

@@ -5,4 +5,4 @@ Route::get("/", function() {
 });
 
 Route::get("contacts", "LaralexController@viewContacts");
-Route::get("companies", "LaralexController@viewContacts");
+Route::get("companies", "LaralexController@viewCompanies");
