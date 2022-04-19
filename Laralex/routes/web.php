@@ -6,3 +6,6 @@ Route::get("/", function() {
 
 Route::get("contacts", "LaralexController@viewContacts");
 Route::get("companies", "LaralexController@viewCompanies");
+Route::get("create", function() {
+    return view("laralex::addEntitiy");
+});

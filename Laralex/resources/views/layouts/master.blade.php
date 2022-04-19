@@ -61,9 +61,12 @@
                                     Firmen
                                 </li>
                             </a>
+
                         </ul>
 
-
+                        <a href="{{ url("laralex/create") }}">
+                            <li class="cursor-pointer bg-blue-700 rounded-lg px-2.5 mb-2 mt-4 py-1 {{ Request::is("laralex/create") ? "bg-blue-500" : ""}}">Erstellen</li>
+                        </a>
                     </ul>
                 </div>
             </div>
@@ -99,7 +102,7 @@
     <div class="col-span-5">
         @section("topNav")
             <div id="topNav" class="flex h-10 shadow bg-slate-200">
-
+                @yield("topNavContent")
             </div>
         @show
         <div class="bg-slate-100">
