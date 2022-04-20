@@ -101,11 +101,11 @@
     @show
     <div class="col-span-5">
         @section("topNav")
-            <div id="topNav" class="flex h-10 shadow bg-slate-200">
+            <div id="topNav" class="flex justify-start items-center shadow bg-slate-100">
                 @yield("topNavContent")
             </div>
         @show
-        <div class="bg-slate-100">
+        <div class="bg-slate-50">
             @yield("content")
         </div>
     </div>
