@@ -134,7 +134,26 @@ class Laralex
      */
     public function createCompany(array $roles, array $company, array $contacts)
     {
+        $merge = [
+            'version' => 0,
+            'roles' => $roles,
+            'company' => $company
+        ];
+        /*
+        $company_model = [
+            'name' => $comName,
+            'taxNumber' => $tax,
+            'vatRegistrationId' => $vat,
+            'allowTaxFreeInvoices' => $boolTax,
+            'contactPersons' => []
+        ];
+        */
 
+        if (DEBUG) {
+            Laralex::log(json_encode($merge), "json");
+        }
+
+        Laralex::post(ENDPOINT_CONTACTS, $merge);
     }
 
 

@@ -9,10 +9,10 @@
     <title>@yield("title")</title>
 </head>
 <body>
-<div class="grid grid-cols-6">
+<div class="grid grid-cols-6 h-full min-h-screen">
     <div>
         @section("sideNav")
-            <div id="nav" class="min-h-screen bg-blue-600">
+            <div id="nav" class="min-h-screen h-full bg-blue-600">
                 <div id="navHeader" class="shadow">
                     <div class="flex justify-center py-5 m-auto text-2xl bg-blue-800 text-slate-200">
                         Laralex
@@ -100,13 +100,15 @@
 
     @show
     <div class="col-span-5">
-        @section("topNav")
-            <div id="topNav" class="flex justify-start items-center shadow bg-slate-100">
-                @yield("topNavContent")
+        <div class="flex flex-col h-full">
+            @section("topNav")
+                <div id="topNav" class="flex justify-start items-center shadow bg-slate-100">
+                    @yield("topNavContent")
+                </div>
+            @show
+            <div class="bg-slate-50 flex flex-grow">
+                @yield("content")
             </div>
-        @show
-        <div class="bg-slate-50">
-            @yield("content")
         </div>
     </div>
 </div>

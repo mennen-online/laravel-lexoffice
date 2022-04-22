@@ -24,6 +24,10 @@ class LaralexServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . "/../config/laralex.php" => config_path("laralex.php")
         ], "laralex-config");
+
+        $this->publishes([
+            __DIR__ . "/../public" => public_path("mennen-online/laralex")
+        ], "laralex-assets");
     }
 
     private function registerResources()

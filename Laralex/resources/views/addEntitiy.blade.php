@@ -20,23 +20,27 @@
     </div>
 @endsection
 @section("content")
-    <div class="px-12 py-6 m max-w-xs w-full mx-auto bg-slate-100 rounded-lg shadow-md">
+    <div class="px-8 py-6 m max-w-xs w-full self-center mx-auto bg-slate-100 rounded-lg shadow-md">
         <form method="POST" class="" action="{{ url("/laralex") }}">
             <label for="indLastName" class="block mb-1">Name</label>
-            <input type="text" id="indLastName" name="lastName" class="w-full mb-4 p-1 appearance-none outline outline-1 outline-blue-300 focus:outline-blue-400 transition-all">
-
+            <input type="text" id="indLastName" name="lastName"
+                   class="w-full mb-4 p-1 appearance-none outline outline-1 outline-blue-300 focus:outline-blue-400 transition-all">
 
 
             <label for="indFirstName" class="block mb-1">Vorname</label>
-            <input type="text" id="indFirstName" name="firstName" class="w-full p-1 appearance-none outline outline-1 outline-blue-300 focus:outline-blue-400 transition-all">
+            <input type="text" id="indFirstName" name="firstName"
+                   class="w-full p-1 appearance-none outline outline-1 outline-blue-300 focus:outline-blue-400 transition-all">
 
 
             <div class="flex flex-row items-center justify-between mt-5">
-                <input type="button" value="Anlegen" class="cursor-pointer bg-blue-200 transition hover:bg-blue-400 hover:text-slate-50  px-4 py-1 rounded outline outline-1 outline-blue-400 ">
-                <input type="reset" value="Reset" class="rounded cursor-pointer bg-red-200 px-4 py-1 outline outline-1 hover:bg-red-500 transition hover:text-slate-50 outline-red-400">
+                <input type="button" value="Anlegen"
+                       class="cursor-pointer shadow-md bg-blue-400 hover:bg-blue-500 transition text-slate-50  px-4 py-1 rounded outline outline-1 outline-blue-400 ">
+                <input type="reset" value="Reset"
+                       class="rounded cursor-pointer shadow-md bg-red-400 px-4 py-1 outline outline-1 hover:bg-red-500 transition text-slate-50 outline-red-400">
             </div>
         </form>
     </div>
+
 
     <script type="text/javascript">
         function createFormIndividual() {
