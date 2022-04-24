@@ -10,17 +10,9 @@
 </head>
 <body>
 <div id="app">
-    <div class="grid grid-cols-4">
-        <div class="">
+    <laralex>
 
-            <sidenav></sidenav>
-        </div>
-
-        <div class="col-span-3"></div>
-
-    </div>
-
-
+    </laralex>
 </div>
 <script src="{{ asset("mennen-online/laralex/js/app.js") }}"></script>
 </body>

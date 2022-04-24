@@ -1,5 +1,8 @@
-import { createApp } from "vue"
-import SideNav from "../components/navigation_side.vue"
+import {createApp} from "vue"
+import laralex from "../components/laralex.vue"
+
 const app = createApp({})
-app.component("sidenav", SideNav)
+app
+    .component("laralex", laralex)
+
 app.mount('#app')
