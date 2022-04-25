@@ -7,12 +7,16 @@ use Illuminate\Routing\Controller;
 
 class LaralexController extends Controller
 {
-    public function viewContacts()
+    public static function getAllContacts()
     {
         $data = Laralex::getAllContacts();
-        return view("laralex::contacts")->with("data", $data['content']);
-
+        return (json_encode($data["content"]));
     }
+    public function getRevenue()
+    {
+        return (Laralex::getRevenue());
+    }
+
 
     public function viewCompanies()
     {

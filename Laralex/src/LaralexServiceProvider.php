@@ -12,7 +12,6 @@ class LaralexServiceProvider extends ServiceProvider
     {
         $this->registerPublishing();
         $this->registerResources();
-        Laralex::init();
     }
 
     public function register() {
@@ -41,6 +40,7 @@ class LaralexServiceProvider extends ServiceProvider
     {
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__ . "/../routes/web.php");
+            $this->loadRoutesFrom(__DIR__ . "/../routes/api.php");
         });
     }
 

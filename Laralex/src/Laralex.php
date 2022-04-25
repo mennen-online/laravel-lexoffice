@@ -15,7 +15,7 @@ class Laralex
      * Sets globals used within the Laralex Class
      */
 
-    public function init()
+    public function __construct()
     {
         define("APIURL", config("laralex.api-url"));
         define("TOKEN", config("laralex.api-token-live"));
@@ -64,12 +64,34 @@ class Laralex
         return json_decode($response, true);
     }
 
+    public function getRevenue()
+    {
+        $data = Laralex::get("v1/voucherlist", "?voucherType=invoice&voucherStatus=open")["content"];
+
+        $totalOpen = 0;
+        $count = 0;
+
+        foreach ($data as $occurence) {
+            $totalOpen += $occurence["totalAmount"];
+            $count++;
+        }
+
+
+
+        return(
+            [
+            "openRevenue" => $totalOpen,
+            "countInvoices" => $count
+        ]
+        );
+
+    }
     /**
      * Gets all contacts
      * @return array
      * @throws GuzzleHttp\Exception\GuzzleException
      */
-    public function getAllContacts(): array
+    public function getAllContacts()
     {
         return Laralex::get(ENDPOINT_CONTACTS, "?page=0");
     }
