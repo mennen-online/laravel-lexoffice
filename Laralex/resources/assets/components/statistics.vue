@@ -1,21 +1,26 @@
 <template>
   <div class="min-h-screen w-full bg-slate-100">
-    <chart-donut :chart-data="chartData"></chart-donut>
+    <apexchart width="500" height="500" type="bar" :series="chartData"></apexchart>
   </div>
 </template>
 
 <script>
-import chartDonut from "./chart_Donut.vue";
+
 
 export default {
   name: "statistics",
 
   components: {
-    chartDonut
+
   },
   data() {
     return {
-      chartData: []
+      chartData: [
+        {
+          name: "Offen",
+          data: [1500, 24]
+        }
+      ]
     }
   },
 
