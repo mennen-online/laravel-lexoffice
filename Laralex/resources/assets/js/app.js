@@ -5,7 +5,6 @@ import laralex from "../components/laralex.vue"
 const app = createApp({})
 app
     .component("laralex", laralex)
-
-app.use(VueApexCharts)
+    .use(VueApexCharts)
 
 app.mount('#app')

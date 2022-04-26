@@ -17409,10 +17409,50 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      chartData: [{
-        name: "Offen",
-        data: [1500, 24]
-      }]
+      chartOptions: {
+        chart: {
+          id: "pendingInvoices-chart"
+        },
+        dataLabels: {
+          enabled: false
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              labels: {
+                show: true,
+                value: {
+                  formatter: function formatter(val) {
+                    return val + " EUR";
+                  }
+                }
+              }
+            }
+          }
+        },
+        labels: ['Offene Forderungen']
+      },
+      chartOptionsInvoices: {
+        chart: {
+          id: "totalPendingInvoices-chart"
+        },
+        dataLabels: {
+          enabled: false
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              labels: {
+                show: true
+              }
+            }
+          }
+        },
+        labels: ['Offene Rechnungen']
+      },
+      apiData: {},
+      series: [1520],
+      seriesInvoices: [25]
     };
   },
   created: function created() {
@@ -17421,7 +17461,7 @@ __webpack_require__.r(__webpack_exports__);
     fetch("http://127.0.0.1:8000/laralex/api/getRevenue").then(function (response) {
       return response.json();
     }).then(function (data) {
-      return _this.chartData = data;
+      return _this.apiData = data;
     });
   },
   methods: {}
@@ -17465,10 +17505,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "grid grid-cols-8"
+  "class": "grid grid-cols-5"
 };
 var _hoisted_2 = {
-  "class": "col-span-7"
+  "class": "col-span-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_sidenav = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sidenav");
@@ -17562,14 +17602,21 @@ var _hoisted_1 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_apexchart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("apexchart");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
-    width: "500",
-    height: "500",
-    type: "bar",
-    series: $data.chartData
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
+    options: $data.chartOptions,
+    series: $data.series,
+    type: "donut",
+    width: "500"
   }, null, 8
   /* PROPS */
-  , ["series"])]);
+  , ["options", "series"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
+    options: $data.chartOptionsInvoices,
+    series: $data.seriesInvoices,
+    type: "donut",
+    width: "500"
+  }, null, 8
+  /* PROPS */
+  , ["options", "series"])])]);
 }
 
 /***/ }),
@@ -17590,8 +17637,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-app.component("laralex", _components_laralex_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
-app.use((vue3_apexcharts__WEBPACK_IMPORTED_MODULE_1___default()));
+app.component("laralex", _components_laralex_vue__WEBPACK_IMPORTED_MODULE_2__["default"]).use((vue3_apexcharts__WEBPACK_IMPORTED_MODULE_1___default()));
 app.mount('#app');
 
 /***/ }),

@@ -1,10 +1,10 @@
 <template>
-  <div class="grid grid-cols-8">
+  <div class="grid grid-cols-5">
     <div>
       <sidenav @changeTab="(tab) => currentlyActive = tab" :activetab="currentlyActive"></sidenav>
     </div>
 
-    <div class="col-span-7">
+    <div class="col-span-4">
       <statistics v-if="currentlyActive === 'Start'"></statistics>
       <contacts v-if="currentlyActive === 'Contacts'"></contacts>
     </div>
