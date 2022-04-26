@@ -1,0 +1,31 @@
+{
+  "name": "laralex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "development": "mix",
+    "dev": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "production": "mix --production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "apexcharts": "^3.35.0",
+    "autoprefixer": "^10.4.4",
+    "laravel-mix": "^6.0.43",
+    "postcss": "^8.4.12",
+    "tailwindcss": "^3.0.24",
+    "vue": "^3.2.33",
+    "vue-loader": "^16.2.0",
+    "vue3-apexcharts": "^1.4.1"
+  }
+}

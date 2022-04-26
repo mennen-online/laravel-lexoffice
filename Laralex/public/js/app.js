@@ -17410,6 +17410,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       chartOptions: {
+        colors: ["#fb923c"],
+        stroke: {
+          show: true,
+          colors: ["#f97316"]
+        },
+        legend: {
+          show: false
+        },
         chart: {
           id: "pendingInvoices-chart"
         },
@@ -17419,9 +17427,17 @@ __webpack_require__.r(__webpack_exports__);
         plotOptions: {
           pie: {
             donut: {
+              size: "75%",
               labels: {
                 show: true,
+                name: {
+                  show: false
+                },
                 value: {
+                  show: true,
+                  offsetY: 8,
+                  fontSize: "12px",
+                  fontWeight: "bold",
                   formatter: function formatter(val) {
                     return val + " EUR";
                   }
@@ -17433,6 +17449,14 @@ __webpack_require__.r(__webpack_exports__);
         labels: ['Offene Forderungen']
       },
       chartOptionsInvoices: {
+        colors: ["#60a5fa"],
+        stroke: {
+          show: true,
+          colors: ["#3b82f6"]
+        },
+        legend: {
+          show: false
+        },
         chart: {
           id: "totalPendingInvoices-chart"
         },
@@ -17442,8 +17466,16 @@ __webpack_require__.r(__webpack_exports__);
         plotOptions: {
           pie: {
             donut: {
+              size: "75%",
               labels: {
-                show: true
+                show: true,
+                name: {
+                  show: false
+                },
+                value: {
+                  show: true,
+                  offsetY: 8
+                }
               }
             }
           }
@@ -17451,8 +17483,8 @@ __webpack_require__.r(__webpack_exports__);
         labels: ['Offene Rechnungen']
       },
       apiData: {},
-      series: [1520],
-      seriesInvoices: [25]
+      series: [],
+      invoiceCount: []
     };
   },
   created: function created() {
@@ -17461,9 +17493,11 @@ __webpack_require__.r(__webpack_exports__);
     fetch("http://127.0.0.1:8000/laralex/api/getRevenue").then(function (response) {
       return response.json();
     }).then(function (data) {
-      return _this.apiData = data;
+      _this.invoiceCount[0] = data.countInvoices;
+      _this.series[0] = parseFloat(data.openRevenue).toFixed(2);
     });
   },
+  computed: {},
   methods: {}
 });
 
@@ -17518,10 +17552,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_contacts = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("contacts");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sidenav, {
+    activetab: $data.currentlyActive,
     onChangeTab: _cache[0] || (_cache[0] = function (tab) {
       return $data.currentlyActive = tab;
-    }),
-    activetab: $data.currentlyActive
+    })
   }, null, 8
   /* PROPS */
   , ["activetab"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$data.currentlyActive === 'Start' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_statistics, {
@@ -17599,24 +17633,29 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "min-h-screen w-full bg-slate-100"
 };
+var _hoisted_2 = {
+  "class": "flex flex-row shadow"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_apexchart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("apexchart");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [this.series.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_apexchart, {
+    key: 0,
     options: $data.chartOptions,
     series: $data.series,
     type: "donut",
-    width: "500"
+    height: "150"
   }, null, 8
   /* PROPS */
-  , ["options", "series"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_apexchart, {
+  , ["options", "series"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), this.series.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_apexchart, {
+    key: 1,
     options: $data.chartOptionsInvoices,
-    series: $data.seriesInvoices,
+    series: $data.invoiceCount,
     type: "donut",
-    width: "500"
+    height: "150"
   }, null, 8
   /* PROPS */
-  , ["options", "series"])])]);
+  , ["options", "series"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
 
 /***/ }),
@@ -17690,13 +17729,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _contacts_vue_vue_type_template_id_7c03ef50__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./contacts.vue?vue&type=template&id=7c03ef50 */ "./resources/assets/components/contacts.vue?vue&type=template&id=7c03ef50");
 /* harmony import */ var _contacts_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contacts.vue?vue&type=script&lang=js */ "./resources/assets/components/contacts.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_contacts_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_contacts_vue_vue_type_template_id_7c03ef50__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/contacts.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_contacts_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_contacts_vue_vue_type_template_id_7c03ef50__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/contacts.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -17718,13 +17757,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _laralex_vue_vue_type_template_id_bc7d0c74__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./laralex.vue?vue&type=template&id=bc7d0c74 */ "./resources/assets/components/laralex.vue?vue&type=template&id=bc7d0c74");
 /* harmony import */ var _laralex_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./laralex.vue?vue&type=script&lang=js */ "./resources/assets/components/laralex.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_laralex_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_laralex_vue_vue_type_template_id_bc7d0c74__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/laralex.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_laralex_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_laralex_vue_vue_type_template_id_bc7d0c74__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/laralex.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -17746,13 +17785,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _navigation_side_vue_vue_type_template_id_524e82a6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./navigation_side.vue?vue&type=template&id=524e82a6 */ "./resources/assets/components/navigation_side.vue?vue&type=template&id=524e82a6");
 /* harmony import */ var _navigation_side_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navigation_side.vue?vue&type=script&lang=js */ "./resources/assets/components/navigation_side.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_navigation_side_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_navigation_side_vue_vue_type_template_id_524e82a6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/navigation_side.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_navigation_side_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_navigation_side_vue_vue_type_template_id_524e82a6__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/navigation_side.vue"]])
 /* hot reload */
 if (false) {}
 
@@ -17774,13 +17813,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _statistics_vue_vue_type_template_id_66832c30__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./statistics.vue?vue&type=template&id=66832c30 */ "./resources/assets/components/statistics.vue?vue&type=template&id=66832c30");
 /* harmony import */ var _statistics_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./statistics.vue?vue&type=script&lang=js */ "./resources/assets/components/statistics.vue?vue&type=script&lang=js");
-/* harmony import */ var C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ var C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
 
 ;
-const __exports__ = /*#__PURE__*/(0,C_Users_ckker_PhpstormProjects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_statistics_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_statistics_vue_vue_type_template_id_66832c30__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/statistics.vue"]])
+const __exports__ = /*#__PURE__*/(0,C_Users_ckker_Work_Projects_laravel_lexoffice_laralex_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_statistics_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_statistics_vue_vue_type_template_id_66832c30__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/assets/components/statistics.vue"]])
 /* hot reload */
 if (false) {}
 
