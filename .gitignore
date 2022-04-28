@@ -3,3 +3,6 @@
 package-lock.json
 /.idea
 ./Laralex/node_modules
+.prettierignore
+.prettierrc.json
+node_modules

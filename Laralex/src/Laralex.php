@@ -10,7 +10,6 @@ use GuzzleHttp;
  */
 class Laralex
 {
-
     /**
      * Sets globals used within the Laralex Class
      */
@@ -20,7 +19,7 @@ class Laralex
         define("APIURL", config("laralex.api-url"));
         define("TOKEN", config("laralex.api-token-live"));
         define("ENDPOINT_CONTACTS", config("laralex.endpoint-contacts"));
-        define("DEBUG", config('laralex.debug'));
+        define("DEBUG", config("laralex.debug"));
     }
 
     /**
@@ -31,9 +30,7 @@ class Laralex
 
     public function getContact(string $id): array
     {
-
         return Laralex::get(ENDPOINT_CONTACTS, $id);
-
     }
 
     /**
@@ -47,18 +44,21 @@ class Laralex
     {
         $client = new GuzzleHttp\Client();
 
-        $request = $client->request('GET', APIURL . $endpoint . $payload, [
-            'headers' => [
+        $request = $client->request("GET", APIURL . $endpoint . $payload, [
+            "headers" => [
                 "Authorization" => "Bearer " . TOKEN,
-                "Accept" => "application/json"
-            ]
+                "Accept" => "application/json",
+            ],
         ]);
 
         $response = $request->getBody();
 
         // Enable logging if DEBUG is true
         if (DEBUG) {
-            file_put_contents("output.php", print_r(json_decode($response, true), true));
+            file_put_contents(
+                "output.php",
+                print_r(json_decode($response, true), true)
+            );
         }
 
         return json_decode($response, true);
@@ -66,7 +66,10 @@ class Laralex
 
     public function getRevenue()
     {
-        $data = Laralex::get("v1/voucherlist", "?voucherType=invoice&voucherStatus=open&size=250")["content"];
+        $data = Laralex::get(
+            "v1/voucherlist",
+            "?voucherType=invoice&voucherStatus=open&size=250"
+        )["content"];
         $totalOpen = 0;
         $count = 0;
 
@@ -75,14 +78,10 @@ class Laralex
             $count++;
         }
 
-
-        return (
-        [
+        return [
             "openRevenue" => $totalOpen,
-            "countInvoices" => $count
-        ]
-        );
-
+            "countInvoices" => $count,
+        ];
     }
 
     /**
@@ -90,21 +89,44 @@ class Laralex
      * @return array
      * @throws GuzzleHttp\Exception\GuzzleException
      */
-    public function getAllContacts()
+    public function getAllContacts($page = 0, $size = 250, $all = false)
     {
-        $page = 0;
-        $data = Laralex::get(ENDPOINT_CONTACTS, "?page=$page?&size=250");
-        if(isset($data["totalPages"])) {
-            if($data["totalPages"] !== 0) {
-                while($page < $data["totalPages"]) {
-                    $page++;
-                    array_push($data["content"], (Laralex::get(ENDPOINT_CONTACTS, "?page=$page?&size=250"))["content"]);
+
+        $currentSet = Laralex::get(
+            ENDPOINT_CONTACTS,
+            "?page=" . $page . "&size=" . $size
+        );
+        $helperSet = [];
+
+        if ($all == true) {
+            if (isset($currentSet["last"])) {
+                if ($currentSet["last"] === true) {
+                    return $currentSet;
+                } else {
+                    while (true) {
+                        $page++;
+                        $helperSet = Laralex::get(
+                            ENDPOINT_CONTACTS,
+                            "?page=" . $page . "&size=" . $size
+                        );
+                        if ($helperSet["last"] === true) {
+                            $currentSet = array_merge_recursive(
+                                $currentSet,
+                                $helperSet
+                            );
+                            break;
+                        } else {
+                            $currentSet = array_merge_recursive(
+                                $currentSet,
+                                $helperSet
+                            );
+                        }
+                    }
                 }
             }
         }
 
-        return $data["content"];
-
+        return $currentSet;
     }
 
     /**
@@ -116,10 +138,10 @@ class Laralex
     public function createPerson(array $role, array $person, string $note)
     {
         $merge = [
-            'version' => 0,
-            'roles' => $role,
-            'person' => $person,
-            'note' => $note
+            "version" => 0,
+            "roles" => $role,
+            "person" => $person,
+            "note" => $note,
         ];
 
         if (DEBUG) {
@@ -150,14 +172,13 @@ class Laralex
         $client = new GuzzleHttp\Client();
 
         $request = $client->request("POST", APIURL . $endpoint, [
-            'headers' => [
+            "headers" => [
                 "Authorization" => "Bearer " . TOKEN,
                 "Accept" => "application/json",
-                "Content-Type" => "application/json"
+                "Content-Type" => "application/json",
             ],
-            "body" => json_encode($payload, JSON_FORCE_OBJECT)
+            "body" => json_encode($payload, JSON_FORCE_OBJECT),
         ]);
-
     }
 
     /**
@@ -168,9 +189,9 @@ class Laralex
     public function createCompany(array $roles, array $company, array $contacts)
     {
         $merge = [
-            'version' => 0,
-            'roles' => $roles,
-            'company' => $company
+            "version" => 0,
+            "roles" => $roles,
+            "company" => $company,
         ];
         /*
         $company_model = [
@@ -188,6 +209,4 @@ class Laralex
 
         Laralex::post(ENDPOINT_CONTACTS, $merge);
     }
-
-
 }

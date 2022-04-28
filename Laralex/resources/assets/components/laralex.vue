@@ -1,11 +1,16 @@
 <template>
-  <div class="grid grid-cols-5">
+  <div class="grid grid-cols-8">
     <div>
-      <sidenav :activetab="currentlyActive" @changeTab="(tab) => currentlyActive = tab"></sidenav>
+      <sidenav
+        :activetab="currentlyActive"
+        @changeTab="(tab) => (currentlyActive = tab)"
+      ></sidenav>
     </div>
 
-    <div class="col-span-4">
-      <statistics v-if="currentlyActive === 'Start'"></statistics>
+    <div class="col-span-7">
+      <keep-alive>
+        <statistics v-if="currentlyActive === 'Start'"></statistics>
+      </keep-alive>
 
       <contacts v-if="currentlyActive === 'Contacts'"></contacts>
     </div>
@@ -13,26 +18,24 @@
 </template>
 
 <script>
-import sidenav from "./navigation_side.vue"
-import statistics from "./statistics.vue"
-import contacts from "./contacts.vue"
+import sidenav from "./navigation_side.vue";
+import statistics from "./statistics.vue";
+import contacts from "./contacts.vue";
 
 export default {
   name: "laralex",
   data() {
     return {
-      currentlyActive: "Start"
-    }
+      currentlyActive: "Start",
+    };
   },
 
   components: {
     sidenav,
     statistics,
-    contacts
-  }
-}
+    contacts,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

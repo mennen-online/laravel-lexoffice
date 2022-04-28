@@ -14,19 +14,27 @@ class LaralexServiceProvider extends ServiceProvider
         $this->registerResources();
     }
 
-    public function register() {
-
+    public function register()
+    {
     }
 
     protected function registerPublishing()
     {
-        $this->publishes([
-            __DIR__ . "/../config/laralex.php" => config_path("laralex.php")
-        ], "laralex-config");
+        $this->publishes(
+            [
+                __DIR__ . "/../config/laralex.php" => config_path(
+                    "laralex.php"
+                ),
+            ],
+            "laralex-config"
+        );
 
-        $this->publishes([
-            __DIR__ . "/../public" => public_path("mennen-online/laralex")
-        ], "laralex-assets");
+        $this->publishes(
+            [
+                __DIR__ . "/../public" => public_path("mennen-online/laralex"),
+            ],
+            "laralex-assets"
+        );
     }
 
     private function registerResources()
@@ -48,7 +56,7 @@ class LaralexServiceProvider extends ServiceProvider
     {
         return [
             "prefix" => config("laralex.web-path", "laralex"),
-            "namespace" => "MennenOnline\Laralex\Http\Controllers"
+            "namespace" => "MennenOnline\Laralex\Http\Controllers",
         ];
     }
 
@@ -58,6 +66,4 @@ class LaralexServiceProvider extends ServiceProvider
             return new \MennenOnline\Laralex\Laralex();
         });
     }
-
-
 }

@@ -16,8 +16,8 @@ class LaralexTest extends TestCase
     {
         Laralex::init();
         $array = Laralex::getAllContacts();
-//        $array = LaraLex::getContact("5f0bfb5a-f243-446f-87ba-ac5590bd9834");
-//        Laralex::createPerson(["customer" => []], ["salutation" => "Herr", "firstName" => "Testimus", "lastName" => "Prime"], "");
+        //        $array = LaraLex::getContact("5f0bfb5a-f243-446f-87ba-ac5590bd9834");
+        //        Laralex::createPerson(["customer" => []], ["salutation" => "Herr", "firstName" => "Testimus", "lastName" => "Prime"], "");
         dd($array);
     }
 
