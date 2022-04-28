@@ -1,9 +1,28 @@
 <template>
-  <div class="min-h-screen w-full bg-slate-100">
-      <div class="flex flex-row shadow">
-        <apexchart :options="chartOptions" :series="series" type="donut" height="150" v-if="this.series.length"></apexchart>
-        <apexchart :options="chartOptionsInvoices" :series="invoiceCount" type="donut" height="150" v-if="this.series.length"></apexchart>
+  <div class="min-h-screen bg-slate-100">
+    <div class="h-12 shadow">
+
+    </div>
+    <div class="p-6">
+      <div class="flex flex-row gap-6">
+        <transition-group enter-active-class="duration-200 ease-out" enter-from-class="transform opacity-0"
+                          enter-to-class="opacity-100">
+          <div v-if="this.series.length" class="bg-slate-50 rounded-xl shadow">
+            <h1 class="text-center text-slate-50 font-semibold mb-1 py-2 shadow bg-orange-500 rounded-t-xl">Offene
+              Forderungen</h1>
+            <apexchart :options="chartOptions" :series="series" height="200" type="donut" width="200"/>
+          </div>
+          <div v-if="this.series.length" class="bg-slate-50 rounded-xl shadow">
+            <h1 class="text-center text-slate-50 font-semibold mb-1 py-2 shadow bg-blue-500 rounded-t-xl">Offene Rechnungen</h1>
+            <apexchart v-if="this.series.length" :options="chartOptionsInvoices" :series="invoiceCount" width="200" height="200"
+                       type="donut"></apexchart>
+
+          </div>
+        </transition-group>
       </div>
+    </div>
+    <!--    <apexchart v-if="this.series.length" :options="chartOptions" :series="series" height="250" type="donut"></apexchart>-->
+
   </div>
 </template>
 
@@ -18,10 +37,6 @@ export default {
     return {
       chartOptions: {
         colors: ["#fb923c"],
-        stroke: {
-          show: true,
-          colors: ["#f97316"]
-        },
         legend: {
           show: false
         },
@@ -39,12 +54,12 @@ export default {
               labels: {
                 show: true,
                 name: {
-                  show:false
+                  show: false
                 },
                 value: {
                   show: true,
-                  offsetY: 8,
-                  fontSize: "12px",
+                  offsetY: 6,
+                  fontSize: "16px",
                   fontWeight: "bold",
                   formatter: function (val) {
                     return val + " EUR"
@@ -59,10 +74,6 @@ export default {
       },
       chartOptionsInvoices: {
         colors: ["#60a5fa"],
-        stroke: {
-          show: true,
-          colors: ["#3b82f6"]
-        },
         legend: {
           show: false
         },
@@ -79,11 +90,13 @@ export default {
               labels: {
                 show: true,
                 name: {
-                  show:false
+                  show: false
                 },
                 value: {
                   show: true,
-                  offsetY: 8
+                  offsetY: 6,
+                  fontSize: "16px",
+                  fontWeight: "bold"
                 }
 
               }
@@ -107,8 +120,7 @@ export default {
         })
   },
 
-  computed: {
-  },
+  computed: {},
 
   methods: {},
 

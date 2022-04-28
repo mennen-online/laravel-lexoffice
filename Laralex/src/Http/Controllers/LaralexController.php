@@ -17,6 +17,22 @@ class LaralexController extends Controller
         return (Laralex::getRevenue());
     }
 
+    public function getContactCount(): array {
+        $data = Laralex::getAllContacts();
+        $personCount = 0;
+        $companyCount = 0;
+
+        foreach($data as $entry) {
+            if(array_key_exists("person", $entry)) {
+                $personCount++;
+            } else {
+                $companyCount++;
+            }
+        }
+
+        return ["personCount" => $personCount, "companyCount" => $companyCount];
+    }
+
 
     public function viewCompanies()
     {

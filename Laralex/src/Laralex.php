@@ -66,8 +66,7 @@ class Laralex
 
     public function getRevenue()
     {
-        $data = Laralex::get("v1/voucherlist", "?voucherType=invoice&voucherStatus=open")["content"];
-
+        $data = Laralex::get("v1/voucherlist", "?voucherType=invoice&voucherStatus=open&size=250")["content"];
         $totalOpen = 0;
         $count = 0;
 
@@ -77,15 +76,15 @@ class Laralex
         }
 
 
-
-        return(
-            [
+        return (
+        [
             "openRevenue" => $totalOpen,
             "countInvoices" => $count
         ]
         );
 
     }
+
     /**
      * Gets all contacts
      * @return array
@@ -93,7 +92,19 @@ class Laralex
      */
     public function getAllContacts()
     {
-        return Laralex::get(ENDPOINT_CONTACTS, "?page=0");
+        $page = 0;
+        $data = Laralex::get(ENDPOINT_CONTACTS, "?page=$page?&size=250");
+        if(isset($data["totalPages"])) {
+            if($data["totalPages"] !== 0) {
+                while($page < $data["totalPages"]) {
+                    $page++;
+                    array_push($data["content"], (Laralex::get(ENDPOINT_CONTACTS, "?page=$page?&size=250"))["content"]);
+                }
+            }
+        }
+
+        return $data["content"];
+
     }
 
     /**
