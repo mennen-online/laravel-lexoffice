@@ -1,6 +1,5 @@
 <template>
   <div class="min-h-screen bg-slate-100">
-    <div class="h-12 shadow"></div>
     <div class="p-6">
       <div class="flex md:flex-row flex-col gap-6">
         <transition-group

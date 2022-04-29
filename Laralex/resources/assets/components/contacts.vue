@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen h-full bg-slate-100 flex flex-col px-6 p-4">
+  <div class="w-full min-h-screen h-full bg-slate-100 flex flex-col px-6">
     <div
       class="flex flex-row justify-between mb-4 text-slate-900 items-baseline px-2"
     >
@@ -46,15 +46,20 @@
     </div>
 
     <div
-      class="w-full min-h-screen bg-slate-50 rounded-xl shadow overflow-hidden"
+      class="w-full min-h-screen bg-slate-50 rounded-xl shadow overflow-hidden mb-8"
     >
-      <table class="w-full text-left align-baseline table-fixed">
+      <table
+        class="w-full h-full text-left align-baseline"
+        v-if="this.entries.length"
+      >
         <th class="bg-blue-300 text-lg font-semibold px-4 py-1">Vorname</th>
         <th class="bg-blue-300 text-lg font-semibold px-4 py-1">Nachname</th>
-        <th class="bg-blue-300 text-lg font-semibold px-4 py-1">Art</th>
+        <th class="bg-blue-300 text-lg font-semibold px-4 py-1">
+          Kundennummerr
+        </th>
         <th class="bg-blue-300 text-lg font-semibold px-4 py-1">Rechnungen</th>
 
-        <template v-for="entry in entries" v-if="this.entries.length">
+        <template v-for="entry in entries">
           <template v-for="a in entry">
             <template v-if="a.firstName">
               <tr class="even:bg-slate-100">
@@ -64,6 +69,10 @@
                 <td class="px-4 py-1">
                   {{ a.lastName }}
                 </td>
+                <td class="px-4 py-1">
+                  {{ entry["roles"]["customer"]["number"] }}
+                </td>
+                <td class="px-4 py-1"></td>
               </tr>
             </template>
             <template v-else-if="a['name']">
@@ -72,6 +81,10 @@
                   {{ a.name }}
                 </td>
                 <td class="px-4 py-1">--</td>
+                <td class="px-4 py-1">
+                  {{ entry["roles"]["customer"]["number"] }}
+                </td>
+                <td class="px-4 py-1">{{}}</td>
               </tr>
             </template>
           </template>
@@ -85,7 +98,7 @@
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          class="animate-spin w-16 h-16 "
+          class="animate-spin w-16 h-16"
         >
           <path
             opacity="0.2"
