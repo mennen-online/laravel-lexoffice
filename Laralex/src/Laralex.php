@@ -98,7 +98,7 @@ class Laralex
         );
         $helperSet = [];
 
-        if ($all == true) {
+        if ($all) {
             if (isset($currentSet["last"])) {
                 if ($currentSet["last"] === true) {
                     return $currentSet;
