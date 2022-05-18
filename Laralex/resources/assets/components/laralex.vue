@@ -1,21 +1,23 @@
 <template>
-  <div class="flex flex-row max-w-screen">
-    <div class="">
-      <sidenav
-        :activetab="currentlyActive"
-        :visible="visible"
-        @changeTab="(tab) => (currentlyActive = tab)"
-        @toggleMobile="toggleMobile"
-      ></sidenav>
-    </div>
+  <div class="flex min-h-screen w-screen flex-row" id="super">
+    <sidenav
+      class="flex-shrink-0"
+      :activetab="currentlyActive"
+      :visible="visible"
+      @changeTab="(tab) => (currentlyActive = tab)"
+    ></sidenav>
 
-    <div class="w-full flex flex-col">
-      <optionNav :visible="visible" @toggleMobile="toggleMobile"></optionNav>
-      <keep-alive>
-        <statistics v-if="currentlyActive === 'Start'"></statistics>
-      </keep-alive>
+    <div class="flex w-full flex-col">
+      <!--Optional space for topnav-->
+      <div></div>
 
-      <contacts v-if="currentlyActive === 'Contacts'"></contacts>
+      <div class="overflow-y-scroll">
+        <keep-alive>
+          <statistics v-if="currentlyActive === 'Start'"></statistics>
+        </keep-alive>
+
+        <contacts v-if="currentlyActive === 'Contacts'"></contacts>
+      </div>
     </div>
   </div>
 </template>

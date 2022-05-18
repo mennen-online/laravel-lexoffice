@@ -1,7 +1,9 @@
 <template>
-  <div class="min-h-screen bg-slate-100">
-    <div class="p-6">
-      <div class="flex md:flex-row flex-col gap-6">
+  <div class="min-h-screen bg-slate-50">
+    <div class="px-6">
+      <h1 class="py-6 text-3xl font-semibold text-slate-700">Statistiken</h1>
+
+      <div class="flex flex-col gap-6 md:flex-row">
         <transition-group
           enter-active-class="duration-200 ease-out"
           enter-from-class="transform opacity-0"
@@ -9,10 +11,10 @@
         >
           <div
             v-if="this.openRevenue.length"
-            class="bg-slate-50 rounded-xl shadow"
+            class="rounded-xl bg-slate-50 shadow"
           >
             <h1
-              class="text-center text-slate-50 font-semibold mb-1 py-2 shadow bg-orange-500 rounded-t-xl"
+              class="mb-1 rounded-t-xl bg-orange-500 py-2 text-center font-semibold text-slate-50 shadow"
             >
               Offene Forderungen
             </h1>
@@ -22,16 +24,16 @@
               height="200"
               type="donut"
               width="200"
-              class=" flex flex-col items-center"
+              class="flex flex-col items-center"
             />
           </div>
 
           <div
             v-if="this.invoiceCount.length"
-            class="bg-slate-50 rounded-xl shadow"
+            class="rounded-xl bg-slate-50 shadow"
           >
             <h1
-              class="text-center text-slate-50 font-semibold mb-1 py-2 shadow bg-blue-500 rounded-t-xl"
+              class="mb-1 rounded-t-xl bg-blue-500 py-2 text-center font-semibold text-slate-50 shadow"
             >
               Offene Rechnungen
             </h1>
@@ -41,16 +43,16 @@
               height="200"
               type="donut"
               width="200"
-              class=" flex flex-col items-center"
+              class="flex flex-col items-center"
             ></apexchart>
           </div>
 
           <div
             v-if="this.customerData.length"
-            class="bg-slate-50 rounded-xl shadow"
+            class="rounded-xl bg-slate-50 shadow"
           >
             <h1
-              class="text-center text-slate-50 font-semibold mb-1 py-2 shadow bg-emerald-500 rounded-t-xl"
+              class="mb-1 rounded-t-xl bg-emerald-500 py-2 text-center font-semibold text-slate-50 shadow"
             >
               Kunden
             </h1>
@@ -60,7 +62,7 @@
               height="200"
               type="donut"
               width="200"
-              class=" flex flex-col items-center"
+              class="flex flex-col items-center"
             ></apexchart>
           </div>
         </transition-group>

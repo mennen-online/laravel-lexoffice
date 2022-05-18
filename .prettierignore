@@ -1,9 +1,0 @@
-package-lock.json
-public
-composer.lock
-node_modules
-vendor
-webpack.mix.js
-Laralex/vendor
-storage
-LaralexTest
