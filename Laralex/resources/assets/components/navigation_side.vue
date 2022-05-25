@@ -1,6 +1,5 @@
 <template>
-
-  <nav class="w-80 border-r bg-slate-100 min-w-max">
+  <nav class="w-80 min-w-max border-r bg-slate-100">
     <div class="flex flex-col">
       <div class="self-center p-6">
         <div class="flex flex-row items-center">
@@ -53,7 +52,7 @@
           :class="[activetab === 'Contacts' ? 'bg-slate-200 shadow' : '']"
           @click="changeTab('Contacts')"
         >
-          <span class="py-2.5 px-3 text-slate-700 hover:text-slate-800">
+          <span class="py-2.5 px-3 text-slate-700">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8"
@@ -73,7 +72,7 @@
         </div>
 
         <div
-          class="flex cursor-pointer flex-row items-center rounded-lg transition duration-75"
+          class="flex cursor-pointer flex-row items-center rounded-lg transition duration-75 hover:bg-slate-200"
           :class="[activetab === 'Invoices' ? 'bg-slate-200 shadow' : '']"
           @click=""
         >

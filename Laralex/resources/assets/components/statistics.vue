@@ -1,9 +1,11 @@
 <template>
   <div class="min-h-screen bg-slate-50">
-    <div class="px-6">
-      <h1 class="py-6 text-3xl font-semibold text-slate-700">Statistiken</h1>
+    <div class="">
+      <div class="bg-slate-100">
+        <h1 class="p-6 text-4xl font-semibold text-slate-700">Statistiken</h1>
+      </div>
 
-      <div class="flex flex-col gap-6 md:flex-row">
+      <div class="flex flex-col gap-6 p-6 md:flex-row">
         <transition-group
           enter-active-class="duration-200 ease-out"
           enter-from-class="transform opacity-0"
